@@ -25,10 +25,10 @@ export const FilterChips: React.FC = () => {
           <button
             key={chip.id}
             onClick={() => setSelectedMarketFilter(chip.id)}
-            className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs transition-all active:scale-95 ${
+            className={`shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm transition-all active:scale-95 ${
               isSelected
-                ? 'bg-[#EFC548] text-[#0C1326] font-black shadow-xs ring-1 ring-[#EFC548]'
-                : 'bg-white border border-slate-200 text-slate-600 font-medium hover:text-navy-900 hover:border-slate-300'
+                ? 'bg-[#EFC548] text-[#0C1326] font-black shadow-xs ring-2 ring-[#EFC548]/50'
+                : 'bg-white border border-slate-200 text-slate-700 font-semibold hover:text-navy-900 hover:border-slate-300 shadow-2xs'
             }`}
           >
             {chip.label}

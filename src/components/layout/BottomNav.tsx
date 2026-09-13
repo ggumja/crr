@@ -17,8 +17,8 @@ export const BottomNav: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-100 px-2 py-1.5 transition-all">
-      <div className="max-w-md mx-auto grid grid-cols-5 gap-1">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/80 px-2 py-2 transition-all shadow-lg">
+      <div className="w-full max-w-md mx-auto grid grid-cols-5 gap-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.tab;
@@ -29,27 +29,27 @@ export const BottomNav: React.FC = () => {
                 setActiveTab(item.tab);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className={`relative flex flex-col items-center justify-center py-1 rounded-xl transition-all active:scale-95 ${
+              className={`relative flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all active:scale-95 ${
                 isActive
-                  ? 'text-navy-900 font-extrabold'
-                  : 'text-slate-400 hover:text-slate-700 font-medium'
+                  ? 'text-navy-900 font-black'
+                  : 'text-slate-400 hover:text-slate-700 font-semibold'
               }`}
             >
               <div className="relative">
-                <Icon size={20} className={isActive ? 'stroke-[2.5px] text-navy-900' : 'stroke-[1.8px]'} />
+                <Icon size={22} className={isActive ? 'stroke-[2.5px] text-[#0C1326]' : 'stroke-[1.9px]'} />
                 {item.badge !== undefined && item.badge > 0 && (
-                  <span className={`absolute -top-1 -right-2 min-w-4 h-4 px-1 rounded-full text-[9px] flex items-center justify-center font-black shadow-xs ${
+                  <span className={`absolute -top-1.5 -right-2.5 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] flex items-center justify-center font-black shadow-xs ${
                     isActive ? 'bg-[#EFC548] text-[#0C1326]' : 'bg-slate-700 text-white'
                   }`}>
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className={`text-[10px] mt-0.5 tracking-tight ${isActive ? 'font-black text-navy-900' : 'text-slate-500'}`}>
+              <span className={`text-xs mt-1 tracking-tight ${isActive ? 'font-black text-[#0C1326]' : 'text-slate-500 font-medium'}`}>
                 {item.label}
               </span>
               {isActive && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#EFC548] mt-0.5 shadow-xs" />
+                <div className="w-2 h-1 rounded-full bg-[#EFC548] mt-0.5 shadow-xs" />
               )}
             </button>
           );
