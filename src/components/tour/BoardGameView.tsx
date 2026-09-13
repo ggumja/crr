@@ -61,23 +61,23 @@ export const BoardGameView: React.FC = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-[#0C1326] via-[#131E3A] to-[#0A1020] rounded-3xl p-5 sm:p-6 text-white shadow-xl border border-navy-700/60">
         <div className="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-[#EFC548]/10 blur-2xl pointer-events-none" />
 
-        <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-[#EFC548]/40 flex items-center justify-center font-bold text-xl text-[#EFC548]">
+        <div className="relative z-10 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-md border border-[#EFC548]/40 flex items-center justify-center font-bold text-xl text-[#EFC548] shrink-0">
               🎲
             </div>
-            <div>
-              <h2 className="font-black text-lg tracking-tight text-white">
+            <div className="min-w-0 flex-1">
+              <h2 className="font-black text-base sm:text-lg tracking-tight text-white truncate">
                 청량로드 맛집 보드게임 투어
               </h2>
-              <p className="text-xs text-slate-300 mt-0.5 font-normal">
+              <p className="text-xs text-slate-300 mt-0.5 font-normal truncate">
                 START에서 8대 골목 미식을 완주하고 리워드를 받으세요
               </p>
             </div>
           </div>
-          <div className="text-right">
-            <span className="text-xs text-[#EFC548] font-bold tracking-wider">도장 달성률</span>
-            <p className="text-xl font-black font-mono text-white">{completedCount} / 8</p>
+          <div className="text-right shrink-0 whitespace-nowrap pl-3">
+            <span className="block text-xs text-[#EFC548] font-bold tracking-wider whitespace-nowrap">도장 달성률</span>
+            <p className="text-xl font-black font-mono text-white whitespace-nowrap">{completedCount} / 8</p>
           </div>
         </div>
 
