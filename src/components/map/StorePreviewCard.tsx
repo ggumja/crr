@@ -36,8 +36,8 @@ export const StorePreviewCard: React.FC<Props> = ({ store, onClose }) => {
       </div>
 
       <div className="flex gap-3.5">
-        {/* Thumbnail */}
-        <div className="w-22 h-22 rounded-2xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
+        {/* Fixed-dimension Thumbnail (prevents image blowout) */}
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
           <img
             src={store.image}
             alt={store.name}
@@ -45,18 +45,18 @@ export const StorePreviewCard: React.FC<Props> = ({ store, onClose }) => {
           />
         </div>
 
-        {/* Info */}
-        <div className="flex-1 flex flex-col justify-between">
+        {/* Info Container with min-w-0 to prevent flex overflow */}
+        <div className="flex-1 min-w-0 flex flex-col justify-between">
           <div>
-            <h4 className="font-black text-base text-navy-900 line-clamp-1">
+            <h4 className="font-black text-base text-navy-900 truncate">
               {store.name}
             </h4>
-            <p className="text-xs sm:text-sm text-slate-600 line-clamp-1 mt-0.5 font-medium">
+            <p className="text-xs sm:text-sm text-slate-600 truncate mt-0.5 font-medium">
               {store.signatureMenu[0]}
             </p>
-            <p className="text-xs text-slate-500 mt-1 flex items-center gap-1 line-clamp-1">
+            <p className="text-xs text-slate-500 mt-1 flex items-center gap-1 truncate">
               <MapPin size={13} className="text-[#A97F12] shrink-0" />
-              <span>{store.locationGuide}</span>
+              <span className="truncate">{store.locationGuide}</span>
             </p>
           </div>
 
