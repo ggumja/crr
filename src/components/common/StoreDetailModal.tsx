@@ -175,16 +175,16 @@ export const StoreDetailModal: React.FC = () => {
             </div>
           </div>
 
-          {/* O2O Smallbee Commerce Link Notice */}
+          {/* O2O Commerce Link Notice */}
           <div className="pt-4 pb-2">
             <div className="bg-[#FAF6E6] p-4 rounded-3xl border border-[#EFC548]/40 flex items-start gap-3">
-              <div className="w-8 h-8 rounded-xl bg-[#0C1326] text-[#EFC548] border border-[#EFC548]/30 flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
-                🐝
+              <div className="w-8 h-8 rounded-xl bg-[#0C1326] text-[#EFC548] border border-[#EFC548]/30 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                O2O
               </div>
               <div className="text-xs sm:text-sm">
-                <p className="font-black text-navy-900">스몰비(smallbee) O2O 연동 서비스</p>
+                <p className="font-black text-navy-900">O2O 연동 서비스</p>
                 <p className="text-xs text-slate-700 leading-relaxed mt-1">
-                  앱 내부에서는 상품 결제를 진행하지 않으며, 외부 공식 스몰비 플랫폼에서 주문, 포장, 예약, 대기 기능을 이용하실 수 있습니다.
+                  앱 내부에서는 상품 결제를 진행하지 않으며, O2O 플랫폼에서 주문, 포장, 예약, 대기 기능을 이용하실 수 있습니다.
                 </p>
               </div>
             </div>
@@ -194,7 +194,7 @@ export const StoreDetailModal: React.FC = () => {
         {/* Bottom Sticky CTA Button Group */}
         <div className="p-4 bg-white border-t border-slate-100 space-y-2.5 shrink-0 shadow-lg">
           
-          {/* PRIMARY CTA: Smallbee External Link */}
+          {/* PRIMARY CTA: O2O External Link */}
           <a
             href={smallbeeLink}
             target="_blank"
@@ -202,7 +202,7 @@ export const StoreDetailModal: React.FC = () => {
             className="w-full flex flex-col items-center justify-center py-4 px-4 rounded-2xl bg-[#EFC548] hover:bg-[#E5B730] text-[#0C1326] shadow-md active:scale-[0.99] transition-all group"
           >
             <div className="flex items-center gap-2 font-black text-base text-[#0C1326]">
-              <span>🛒 {t('smallbeeBtn')}</span>
+              <span>{t('smallbeeBtn')}</span>
               <ExternalLink size={18} className="group-hover:translate-x-0.5 transition-transform text-[#0C1326]" />
             </div>
             <span className="text-xs text-[#533C05] font-bold mt-0.5">
