@@ -184,7 +184,7 @@ export const StoreDetailModal: React.FC = () => {
               <div className="text-xs sm:text-sm">
                 <p className="font-black text-navy-900">스몰비(smallbee) O2O 연동 서비스</p>
                 <p className="text-xs text-slate-700 leading-relaxed mt-1">
-                  앱 내부에서는 상품 결제를 진행하지 않으며, 외부 공식 스몰비 플랫폼에서 당일 배송 및 새벽배송 주문이 가능합니다.
+                  앱 내부에서는 상품 결제를 진행하지 않으며, 외부 공식 스몰비 플랫폼에서 주문, 포장, 예약, 대기 기능을 이용하실 수 있습니다.
                 </p>
               </div>
             </div>

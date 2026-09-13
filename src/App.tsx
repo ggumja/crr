@@ -34,10 +34,10 @@ const MainContent: React.FC = () => {
               <span className="text-xs text-slate-400 font-medium">O2O 플랫폼 연동</span>
             </div>
             <h3 className="font-extrabold text-sm sm:text-base text-navy-900 tracking-tight leading-snug">
-              전통시장 상품은 공식 스몰비(smallbee)에서 편리하게 배송받으세요
+              전통시장을 O2O기능 으로 주문, 포장, 예약, 대기 기능을 사용해보세요.
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-              본 앱은 방문객의 오프라인 탐색, 역사 투어, QR 인증을 전담하며, 상품 장바구니와 결제는 각 점포 상세 페이지의 외부 스몰비 링크를 통해 안전하고 편리하게 진행됩니다.
+              본 앱은 방문객의 오프라인 탐색, 역사 투어, QR 인증을 전담하며, 상품 장바구니와 주문·포장·예약은 각 점포의 외부 스몰비 O2O 링크를 통해 편리하게 진행됩니다.
             </p>
             <div className="pt-2 flex items-center justify-between text-sm text-[#7E5D0A] font-bold">
               <button onClick={() => setActiveTab('map')} className="hover:underline flex items-center gap-1.5 py-1">

@@ -83,7 +83,7 @@ export const StorePreviewCard: React.FC<Props> = ({ store, onClose }) => {
           rel="noopener noreferrer"
           className="py-3 px-3 rounded-2xl bg-[#EFC548] hover:bg-[#E5B730] text-[#0C1326] text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 shadow-xs active:scale-95 transition-all text-center"
         >
-          <span>스몰비 상품보기</span>
+          <span>O2O 주문하기</span>
           <ExternalLink size={14} />
         </a>
 
