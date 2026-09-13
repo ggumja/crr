@@ -53,7 +53,7 @@ export const STORES_DATA: StoreItem[] = [
     priceRange: '16,000원 ~ 20,000원',
     description: '무쇠 가마솥에 높은 온도로 바삭하게 튀겨내는 옛날 통닭의 성지. 닭과 함께 튀겨내는 알싸한 꽈리고추와 달콤한 고구마, 쫄깃한 가래떡 튀김이 어우러져 청량리 통닭골목만의 시그니처 매력을 선사합니다.',
     history: '기름 냄새 고소하게 진동하는 통닭골목에서 30년간 자리를 지키며 바삭한 튀김 옷과 신선한 생닭만을 고집하는 명물 노포입니다.',
-    smallbeeUrl: 'https://mobile.smallbee.co.kr/sb_tongdak_namwon',
+    smallbeeUrl: 'https://devuser.smallbee.co.kr/test10.html',
     isAnchor: true,
     tourSpotNumber: 2,
   },

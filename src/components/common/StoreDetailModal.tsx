@@ -19,8 +19,8 @@ export const StoreDetailModal: React.FC = () => {
 
   const isCompleted = hasStamp(selectedStore.storeId);
 
-  // Exact external URL requested by user: https://mobile.smallbee.co.kr/{storeid}
-  const smallbeeLink = `https://mobile.smallbee.co.kr/${selectedStore.storeId}`;
+  // External O2O URL (defaults to https://mobile.smallbee.co.kr/{storeid} or custom smallbeeUrl)
+  const smallbeeLink = selectedStore.smallbeeUrl || `https://mobile.smallbee.co.kr/${selectedStore.storeId}`;
 
   const handleShare = () => {
     if (navigator.share) {

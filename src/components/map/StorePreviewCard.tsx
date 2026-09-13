@@ -11,7 +11,7 @@ interface Props {
 export const StorePreviewCard: React.FC<Props> = ({ store, onClose }) => {
   const { openStoreDetail, openDirections } = useMarket();
 
-  const smallbeeLink = `https://mobile.smallbee.co.kr/${store.storeId}`;
+  const smallbeeLink = store.smallbeeUrl || `https://mobile.smallbee.co.kr/${store.storeId}`;
 
   return (
     <div className="bg-white rounded-3xl p-4 sm:p-5 shadow-xl border border-slate-200/90 animate-in slide-in-from-bottom duration-200">
