@@ -15,26 +15,26 @@ export const StampCouponView: React.FC = () => {
     <div className="space-y-4">
       {/* Stamp Passport Board */}
       <div className="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-[#FAF6E6] border border-[#EFC548]/40 text-[#0C1326] flex items-center justify-center font-bold text-xl shadow-xs">
+        <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
+            <div className="w-11 h-11 rounded-2xl bg-[#FAF6E6] border border-[#EFC548]/40 text-[#0C1326] flex items-center justify-center font-bold text-xl shadow-xs shrink-0">
               🎟️
             </div>
-            <div>
-              <h2 className="font-extrabold text-base text-navy-900 tracking-tight">
+            <div className="min-w-0 flex-1">
+              <h2 className="font-extrabold text-base text-navy-900 tracking-tight truncate">
                 1960 청량로드 스탬프 여권
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5 truncate">
                 방문 QR 스캔으로 스탬프를 모으고 쿠폰을 획득하세요
               </p>
             </div>
           </div>
           <button
             onClick={openQrScanner}
-            className="px-3.5 py-2 rounded-2xl bg-[#0C1326] text-[#EFC548] border border-[#EFC548]/40 text-xs sm:text-sm font-black hover:bg-[#131E3A] transition-all flex items-center gap-1.5 shadow-xs"
+            className="shrink-0 whitespace-nowrap px-3.5 py-2.5 rounded-2xl bg-[#0C1326] text-[#EFC548] border border-[#EFC548]/40 text-xs sm:text-sm font-black hover:bg-[#131E3A] active:scale-95 transition-all flex items-center gap-1.5 shadow-xs"
           >
-            <QrCode size={16} className="text-[#EFC548]" />
-            <span>스캔 인증</span>
+            <QrCode size={16} className="text-[#EFC548] shrink-0" />
+            <span className="whitespace-nowrap">스캔 인증</span>
           </button>
         </div>
 
