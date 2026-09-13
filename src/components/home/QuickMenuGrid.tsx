@@ -66,7 +66,7 @@ export const QuickMenuGrid: React.FC = () => {
               className="p-4 rounded-3xl bg-white border border-slate-200/90 hover:border-[#EFC548] text-left flex flex-col justify-between transition-all active:scale-[0.98] shadow-xs hover:shadow-md group"
             >
               <div className="flex items-start justify-between w-full mb-3.5">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center font-bold bg-[#FAF6E6] text-[#7E5D0A] group-hover:bg-[#EFC548] group-hover:text-[#0C1326] transition-colors shadow-xs">
+                <div className="w-11 h-11 rounded-2xl flex items-center justify-center font-bold bg-[#EFC548] text-[#0C1326] group-hover:bg-[#E5B730] transition-all shadow-xs group-hover:scale-105">
                   <Icon size={21} />
                 </div>
                 {item.badge && (
