@@ -4,6 +4,7 @@ import {
   Phone, Award, ShieldCheck, Sparkles, Share2, QrCode 
 } from 'lucide-react';
 import { useMarket } from '../../context/MarketContext';
+import { STORE_TRANSLATIONS } from '../../data/i18nData';
 
 export const StoreDetailModal: React.FC = () => {
   const { 
@@ -12,10 +13,17 @@ export const StoreDetailModal: React.FC = () => {
     openDirections, 
     openQrScanner, 
     hasStamp, 
+    language,
     t 
   } = useMarket();
 
   if (!selectedStore) return null;
+
+  const trans = STORE_TRANSLATIONS[selectedStore.storeId]?.[language];
+  const displayName = trans?.name || selectedStore.name;
+  const displayDesc = trans?.description || selectedStore.description;
+  const displayBadge = trans?.titleBadge || selectedStore.titleBadge;
+  const displayMarket = trans?.marketName || selectedStore.marketName;
 
   const isCompleted = hasStamp(selectedStore.storeId);
 
@@ -52,7 +60,7 @@ export const StoreDetailModal: React.FC = () => {
           {/* Top Actions */}
           <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
             <span className="px-2.5 py-1 rounded-full bg-slate-900/60 backdrop-blur-md text-white text-xs font-semibold border border-white/20">
-              {selectedStore.marketName}
+              {displayMarket}
             </span>
             <div className="flex items-center gap-2">
               <button
@@ -75,9 +83,9 @@ export const StoreDetailModal: React.FC = () => {
           {/* Bottom Title on Image */}
           <div className="absolute bottom-4 left-4 right-4 text-white">
             <div className="flex items-center gap-2 mb-2 flex-wrap">
-              {selectedStore.titleBadge && (
+              {displayBadge && (
                 <span className="px-2.5 py-0.5 rounded-lg bg-[#EFC548] text-[#0C1326] text-xs font-black shadow-xs">
-                  {selectedStore.titleBadge}
+                  {displayBadge}
                 </span>
               )}
               <span className="px-2.5 py-0.5 rounded-lg bg-white/20 backdrop-blur-sm text-white text-xs font-semibold">
@@ -86,12 +94,12 @@ export const StoreDetailModal: React.FC = () => {
               {selectedStore.tourSpotNumber && (
                 <span className="px-2.5 py-0.5 rounded-lg bg-[#0C1326] text-[#EFC548] border border-[#EFC548]/50 text-xs font-black flex items-center gap-1 shadow-xs">
                   <Sparkles size={13} className="text-[#EFC548]" />
-                  보드게임 {selectedStore.tourSpotNumber}번 코스
+                  청량로드 {selectedStore.tourSpotNumber}번 코스
                 </span>
               )}
             </div>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white drop-shadow-md">
-              {selectedStore.name}
+              {displayName}
             </h2>
           </div>
         </div>
@@ -168,7 +176,7 @@ export const StoreDetailModal: React.FC = () => {
               상인 인터뷰 & 헤리티지 스토리
             </h3>
             <p className="text-xs sm:text-sm leading-relaxed text-slate-700 bg-slate-50/80 p-4 rounded-3xl border border-slate-200/80 font-normal">
-              {selectedStore.description}
+              {displayDesc}
             </p>
             <div className="p-4 bg-[#FAF6E6] border-l-4 border-[#EFC548] rounded-r-3xl text-xs sm:text-sm text-[#0C1326] font-medium leading-relaxed">
               "{selectedStore.history}"

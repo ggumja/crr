@@ -4,7 +4,7 @@ import { useMarket } from '../../context/MarketContext';
 import { ActiveTab } from '../../types/market';
 
 export const QuickMenuGrid: React.FC = () => {
-  const { setActiveTab, stamps } = useMarket();
+  const { setActiveTab, stamps, t } = useMarket();
 
   const menus: {
     tab: ActiveTab;
@@ -15,31 +15,31 @@ export const QuickMenuGrid: React.FC = () => {
   }[] = [
     {
       tab: 'heritage',
-      title: '청량로드1960',
-      subtitle: '1960~2026 청량로드 아카이브',
+      title: t('quickHeritageTitle'),
+      subtitle: t('quickHeritageDesc'),
       icon: History,
-      badge: '66년사',
+      badge: t('quickHeritageBadge'),
     },
     {
       tab: 'map',
-      title: '통합가이드맵',
-      subtitle: '4대 테마길(볼·먹·즐·밤) 지도 탐색',
+      title: t('quickMapTitle'),
+      subtitle: t('quickMapDesc'),
       icon: Map,
-      badge: '4대 테마길',
+      badge: t('quickMapBadge'),
     },
     {
       tab: 'gourmet',
-      title: '가이드투어',
-      subtitle: '힐링·맛·인생사진·밤 4대 코스',
+      title: t('quickTourTitle'),
+      subtitle: t('quickTourDesc'),
       icon: Compass,
-      badge: `${stamps.length}/8 인증`,
+      badge: `${stamps.length}/8 ${t('quickTourVerifiedSuffix')}`,
     },
     {
       tab: 'profile',
-      title: '스탬프 여권',
-      subtitle: '4대 테마길 인증 스탬프 & 배지',
+      title: t('quickStampTitle'),
+      subtitle: t('quickStampDesc'),
       icon: Award,
-      badge: `${stamps.length}개 달성`,
+      badge: `${stamps.length}${t('quickStampAchievedSuffix')}`,
     },
   ];
 
@@ -48,9 +48,9 @@ export const QuickMenuGrid: React.FC = () => {
       <div className="flex items-center justify-between px-1">
         <h2 className="font-extrabold text-base tracking-tight text-navy-900 flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-[#EFC548] inline-block shadow-xs" />
-          핵심 4대 탐색 퀵 메뉴
+          {t('quickMenuTitle')}
         </h2>
-        <span className="text-xs text-slate-400 font-medium">클릭 시 바로 이동</span>
+        <span className="text-xs text-slate-400 font-medium">{t('quickMenuSub')}</span>
       </div>
 
       <div className="grid grid-cols-2 gap-2.5">

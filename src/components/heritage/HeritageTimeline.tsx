@@ -3,9 +3,10 @@ import { History, Sparkles, ChevronRight } from 'lucide-react';
 import { HERITAGE_TIMELINE } from '../../data/tourData';
 import { useMarket } from '../../context/MarketContext';
 import { STORES_DATA } from '../../data/storesData';
+import { HERITAGE_TRANSLATIONS } from '../../data/i18nData';
 
 export const HeritageTimeline: React.FC = () => {
-  const { openStoreDetail } = useMarket();
+  const { openStoreDetail, language, t } = useMarket();
 
   return (
     <div className="space-y-4">
@@ -16,13 +17,13 @@ export const HeritageTimeline: React.FC = () => {
         <div className="relative z-10">
           <div className="flex items-center gap-2 text-[#EFC548] text-xs font-bold uppercase tracking-wider mb-1.5">
             <History size={16} />
-            <span>CHRONOLOGY · 1960 ~ 2026</span>
+            <span>{t('heritageChronology')}</span>
           </div>
           <h2 className="font-black text-xl tracking-tight text-white leading-snug">
-            청량로드1960 · 66년의 아카이브
+            {t('heritageHeaderTitle')}
           </h2>
           <p className="text-xs sm:text-sm text-slate-200 mt-1.5 leading-relaxed font-normal">
-            피난민과 농민들이 일군 장터에서 아시아 최대 한방 클러스터, 그리고 청년과 레트로가 상생하는 오늘까지의 발자취입니다.
+            {t('heritageHeaderDesc')}
           </p>
         </div>
       </div>
@@ -31,6 +32,12 @@ export const HeritageTimeline: React.FC = () => {
       <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-200">
         {HERITAGE_TIMELINE.map((item, idx) => {
           const store = item.relatedStoreId ? STORES_DATA.find(s => s.storeId === item.relatedStoreId) : null;
+          const translated = HERITAGE_TRANSLATIONS[item.year]?.[language];
+          const era = translated?.era || item.era;
+          const title = translated?.title || item.title;
+          const subtitle = translated?.subtitle || item.subtitle;
+          const story = translated?.story || item.story;
+          const marketName = translated?.marketName || item.marketName;
 
           return (
             <div key={idx} className="relative group">
@@ -48,21 +55,21 @@ export const HeritageTimeline: React.FC = () => {
                       {item.year}
                     </span>
                     <span className="px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold">
-                      {item.era}
+                      {era}
                     </span>
                   </div>
                   <span className="text-xs font-bold text-slate-500">
-                    {item.marketName}
+                    {marketName}
                   </span>
                 </div>
 
                 {/* Title */}
                 <div>
                   <h3 className="font-extrabold text-base text-navy-900">
-                    {item.title}
+                    {title}
                   </h3>
                   <p className="text-xs sm:text-sm font-bold text-[#7E5D0A] mt-1">
-                    {item.subtitle}
+                    {subtitle}
                   </p>
                 </div>
 
@@ -70,14 +77,14 @@ export const HeritageTimeline: React.FC = () => {
                 <div className="relative h-40 w-full rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
 
                 {/* Editorial Story */}
                 <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100 font-normal">
-                  {item.story}
+                  {story}
                 </p>
 
                 {/* Connected Store CTA if any */}
@@ -88,7 +95,7 @@ export const HeritageTimeline: React.FC = () => {
                   >
                     <span className="flex items-center gap-2">
                       <Sparkles size={15} className="text-[#7E5D0A]" />
-                      <span>연계 명소: <strong>{store.name}</strong></span>
+                      <span>{t('relatedStorePrefix')} <strong>{store.name}</strong></span>
                     </span>
                     <ChevronRight size={16} className="text-[#7E5D0A]" />
                   </button>

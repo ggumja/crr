@@ -52,7 +52,7 @@ const QrAutoStampToast: React.FC = () => {
 };
 
 const MainContent: React.FC = () => {
-  const { activeTab, setActiveTab } = useMarket();
+  const { activeTab, setActiveTab, t } = useMarket();
 
   return (
     <main className="px-4 py-4 space-y-6 pb-28">
@@ -66,19 +66,19 @@ const MainContent: React.FC = () => {
           <div className="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm space-y-2.5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-[#FAF6E6] text-[#7E5D0A] border border-[#EFC548]/40">
-                디지털 로컬상생 안내
+                {t('o2oNoticeBadge')}
               </span>
-              <span className="text-xs text-slate-400 font-medium">O2O 플랫폼 연동</span>
+              <span className="text-xs text-slate-400 font-medium">{t('o2oNoticeTag')}</span>
             </div>
             <h3 className="font-extrabold text-sm sm:text-base text-navy-900 tracking-tight leading-snug">
-              전통시장을 O2O기능 으로 주문, 포장, 예약, 대기 기능을 사용해보세요.
+              {t('o2oNoticeTitle')}
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-              본 앱은 방문객의 오프라인 탐색, 역사 투어, QR 인증을 전담하며, 상품 장바구니와 주문·포장·예약은 각 점포의 외부 스몰비 O2O 링크를 통해 편리하게 진행됩니다.
+              {t('o2oNoticeDesc')}
             </p>
             <div className="pt-2 flex items-center justify-between text-sm text-[#7E5D0A] font-bold">
               <button onClick={() => setActiveTab('map')} className="hover:underline flex items-center gap-1.5 py-1">
-                <span>9개 시장 가이드맵 보러가기</span>
+                <span>{t('o2oNoticeBtn')}</span>
                 <ChevronRight size={16} />
               </button>
             </div>

@@ -3,14 +3,10 @@ import confetti from 'canvas-confetti';
 import { StoreItem, Language, ActiveTab, ThemeRoadId } from '../types/market';
 import { STORES_DATA } from '../data/storesData';
 import { extractStoreIdFromQr } from '../utils/qrHelper';
-
-interface Translations {
-  [key: string]: {
-    [lang in Language]: string;
-  };
-}
+import { EXTRA_I18N, Translations } from '../data/i18nData';
 
 export const I18N: Translations = {
+  ...EXTRA_I18N,
   serviceTitle: {
     ko: '1960 청량로드',
     en: '1960 Cheongnyang Road',
