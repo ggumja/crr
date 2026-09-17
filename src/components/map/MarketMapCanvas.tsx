@@ -346,7 +346,6 @@ export const MarketMapCanvas: React.FC = () => {
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-[#EFC548]" />
           <span className="font-extrabold text-navy-900 text-sm sm:text-base">공식 안내도</span>
-          <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">2.5D 입체 지도</span>
         </div>
 
         {/* Map Control Toggle Chips */}
