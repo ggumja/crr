@@ -8,11 +8,48 @@ import { AnchorStoresRow } from './components/home/AnchorStoresRow';
 import { MarketMapCanvas } from './components/map/MarketMapCanvas';
 import { BoardGameView } from './components/tour/BoardGameView';
 import { HeritageTimeline } from './components/heritage/HeritageTimeline';
-import { StampCouponView } from './components/profile/StampCouponView';
+import { StampPassportView } from './components/profile/StampPassportView';
 import { StoreDetailModal } from './components/common/StoreDetailModal';
 import { QrScannerModal } from './components/common/QrScannerModal';
 import { DirectionsModal } from './components/common/DirectionsModal';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, CheckCircle2, X } from 'lucide-react';
+
+const QrAutoStampToast: React.FC = () => {
+  const { qrToastMessage, dismissQrToast, setActiveTab } = useMarket();
+
+  if (!qrToastMessage) return null;
+
+  return (
+    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-sm animate-in slide-in-from-top duration-300">
+      <div className="bg-[#0C1326] text-white px-4 py-3.5 rounded-2xl shadow-2xl border border-[#EFC548]/50 flex items-start gap-3">
+        <div className="w-8 h-8 rounded-xl bg-[#EFC548] text-[#0C1326] flex items-center justify-center shrink-0 font-bold mt-0.5">
+          <CheckCircle2 size={18} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-bold text-slate-100 leading-snug">
+            {qrToastMessage}
+          </p>
+          <button
+            onClick={() => {
+              dismissQrToast();
+              setActiveTab('profile');
+            }}
+            className="text-[11px] text-[#FEF08A] font-extrabold hover:underline mt-1.5 flex items-center gap-0.5"
+          >
+            <span>스탬프 여권 확인하기</span>
+            <ChevronRight size={12} />
+          </button>
+        </div>
+        <button
+          onClick={dismissQrToast}
+          className="text-slate-400 hover:text-white shrink-0 p-1"
+        >
+          <X size={15} />
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const MainContent: React.FC = () => {
   const { activeTab, setActiveTab } = useMarket();
@@ -52,7 +89,7 @@ const MainContent: React.FC = () => {
       {activeTab === 'map' && <MarketMapCanvas />}
       {activeTab === 'gourmet' && <BoardGameView />}
       {activeTab === 'heritage' && <HeritageTimeline />}
-      {activeTab === 'profile' && <StampCouponView />}
+      {activeTab === 'profile' && <StampPassportView />}
     </main>
   );
 };
@@ -78,6 +115,7 @@ export const App: React.FC = () => {
           <StoreDetailModal />
           <QrScannerModal />
           <DirectionsModal />
+          <QrAutoStampToast />
         </div>
       </div>
     </MarketProvider>

@@ -1,19 +1,17 @@
 import React from 'react';
-import { Home, Map, UtensilsCrossed, History, Ticket } from 'lucide-react';
+import { Home, Map, Compass, History, Award } from 'lucide-react';
 import { useMarket } from '../../context/MarketContext';
 import { ActiveTab } from '../../types/market';
 
 export const BottomNav: React.FC = () => {
-  const { activeTab, setActiveTab, stamps, coupons, t } = useMarket();
-
-  const unusedCouponsCount = coupons.filter(c => !c.isUsed).length;
+  const { activeTab, setActiveTab, stamps, t } = useMarket();
 
   const navItems: { tab: ActiveTab; label: string; icon: React.ComponentType<{ size: number; className?: string }>; badge?: number }[] = [
     { tab: 'home', label: '홈', icon: Home },
-    { tab: 'map', label: t('mapNav'), icon: Map },
-    { tab: 'gourmet', label: t('gourmetNav'), icon: UtensilsCrossed, badge: stamps.length },
     { tab: 'heritage', label: t('heritageNav'), icon: History },
-    { tab: 'profile', label: t('profileNav'), icon: Ticket, badge: unusedCouponsCount },
+    { tab: 'map', label: t('mapNav'), icon: Map },
+    { tab: 'gourmet', label: t('gourmetNav'), icon: Compass, badge: stamps.length },
+    { tab: 'profile', label: t('profileNav'), icon: Award },
   ];
 
   return (

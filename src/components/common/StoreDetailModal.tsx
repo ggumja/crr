@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   X, ExternalLink, Navigation, CheckCircle, Clock, MapPin, 
-  Phone, Award, ShieldCheck, Sparkles, Share2 
+  Phone, Award, ShieldCheck, Sparkles, Share2, QrCode 
 } from 'lucide-react';
 import { useMarket } from '../../context/MarketContext';
 
@@ -10,7 +10,7 @@ export const StoreDetailModal: React.FC = () => {
     selectedStore, 
     closeStoreDetail, 
     openDirections, 
-    addStamp, 
+    openQrScanner, 
     hasStamp, 
     t 
   } = useMarket();
@@ -220,17 +220,24 @@ export const StoreDetailModal: React.FC = () => {
               <span>{t('directionsBtn')}</span>
             </button>
 
-            <button
-              onClick={() => addStamp(selectedStore.storeId)}
-              className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl text-xs sm:text-sm font-bold border transition-all active:scale-95 ${
-                isCompleted
-                  ? 'bg-[#FAF6E6] text-[#7E5D0A] border-[#EFC548]/50'
-                  : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-200'
-              }`}
-            >
-              <CheckCircle size={15} className={isCompleted ? 'text-[#7E5D0A]' : 'text-slate-400'} />
-              <span>{isCompleted ? '스탬프 완료됨 ✓' : t('checkinBtn')}</span>
-            </button>
+            {isCompleted ? (
+              <div className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl text-xs sm:text-sm font-bold border bg-[#FAF6E6] text-[#7E5D0A] border-[#EFC548]/50 shadow-xs">
+                <CheckCircle size={15} className="text-[#7E5D0A]" />
+                <span>스탬프 인증완료 ✓</span>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  closeStoreDetail();
+                  openQrScanner();
+                }}
+                className="flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl text-xs sm:text-sm font-black bg-[#0C1326] hover:bg-[#131E3A] text-[#EFC548] border border-[#EFC548]/40 active:scale-95 transition-all shadow-xs"
+                title="현장 QR 스캔으로 자동 인증"
+              >
+                <QrCode size={15} className="text-[#EFC548]" />
+                <span>현장 QR 스캔 인증</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

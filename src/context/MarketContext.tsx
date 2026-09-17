@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { StoreItem, CouponItem, Language, ActiveTab } from '../types/market';
+import { StoreItem, Language, ActiveTab, ThemeRoadId } from '../types/market';
 import { STORES_DATA } from '../data/storesData';
-import { INITIAL_COUPONS } from '../data/tourData';
+import { extractStoreIdFromQr } from '../utils/qrHelper';
 
 interface Translations {
   [key: string]: {
@@ -30,10 +30,10 @@ export const I18N: Translations = {
     zh: '连接1960年的温情与今日清凉里',
   },
   homeHeroDesc: {
-    ko: '9개 전통시장, 40년 가업 노포, 스타벅스 1960까지 손안에서 만나는 로컬 가이드',
-    en: '9 traditional markets, 40-year heritage spots, and Starbucks 1960 in your hands',
-    ja: '9つの伝統市場、40年の老舗、スターバックス1960まで巡るローカルガイド',
-    zh: '9个传统市场、40年老字号、星巴克1960一网打尽的本地指南',
+    ko: '4대 테마길(볼거리·먹거리·즐길거리·야간놀거리)과 전문 가이드투어로 만나는 청량리 로컬 매력',
+    en: 'Experience Cheongnyangni through 4 theme roads and official guided tours',
+    ja: '4大テーマロードと公式ガイドツアーで巡る清涼里のローカルな魅力',
+    zh: '通过4大主题路与专业导览游体验清凉里的本土魅力',
   },
   qrQuickBtn: {
     ko: 'QR 현장 인증 시뮬레이터',
@@ -48,22 +48,22 @@ export const I18N: Translations = {
     zh: '综合地图',
   },
   gourmetNav: {
-    ko: '맛집 보드게임',
-    en: 'Gourmet Tour',
-    ja: 'グルメツアー',
-    zh: '美食棋盘游',
+    ko: '가이드투어',
+    en: 'Guide Tour',
+    ja: 'ガイドツアー',
+    zh: '导览游',
   },
   heritageNav: {
-    ko: '노포 시간여행',
-    en: 'Heritage 1960',
-    ja: '老舗タイムライン',
-    zh: '老字号时间线',
+    ko: '청량로드1960',
+    en: 'Cheongnyang Road 1960',
+    ja: '清涼ロード1960',
+    zh: '清凉路1960',
   },
   profileNav: {
-    ko: '스탬프·쿠폰',
-    en: 'My Stamps',
-    ja: 'スタンプ・クーポン',
-    zh: '我的印章卡券',
+    ko: '스탬프',
+    en: 'Stamps',
+    ja: 'スタンプ',
+    zh: '印章',
   },
   smallbeeBtn: {
     ko: 'O2O 서비스 이용하기',
@@ -101,13 +101,13 @@ interface MarketContextType {
   closeStoreDetail: () => void;
   selectedMarketFilter: string;
   setSelectedMarketFilter: (filter: string) => void;
+  activeThemeRoad: ThemeRoadId;
+  setActiveThemeRoad: (road: ThemeRoadId) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   stamps: string[];
   addStamp: (storeId: string) => void;
   hasStamp: (storeId: string) => boolean;
-  coupons: CouponItem[];
-  useCoupon: (couponId: string) => void;
   isQrScannerOpen: boolean;
   openQrScanner: () => void;
   closeQrScanner: () => void;
@@ -115,6 +115,8 @@ interface MarketContextType {
   directionsStore: StoreItem | null;
   openDirections: (store: StoreItem) => void;
   closeDirections: () => void;
+  qrToastMessage: string | null;
+  dismissQrToast: () => void;
   t: (key: string) => string;
 }
 
@@ -125,6 +127,7 @@ export const MarketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [language, setLanguage] = useState<Language>('ko');
   const [selectedStore, setSelectedStore] = useState<StoreItem | null>(null);
   const [selectedMarketFilter, setSelectedMarketFilter] = useState<string>('all');
+  const [activeThemeRoad, setActiveThemeRoad] = useState<ThemeRoadId>('healing');
   const [searchQuery, setSearchQuery] = useState<string>('');
   
   // Stored state in localStorage for persistent demo experience
@@ -137,26 +140,39 @@ export const MarketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   });
 
-  const [coupons, setCoupons] = useState<CouponItem[]>(() => {
-    try {
-      const saved = localStorage.getItem('crl_coupons');
-      return saved ? JSON.parse(saved) : INITIAL_COUPONS;
-    } catch {
-      return INITIAL_COUPONS;
-    }
-  });
-
   const [isQrScannerOpen, setIsQrScannerOpen] = useState(false);
   const [isDirectionsOpen, setIsDirectionsOpen] = useState(false);
   const [directionsStore, setDirectionsStore] = useState<StoreItem | null>(null);
+  const [qrToastMessage, setQrToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
     localStorage.setItem('crl_stamps', JSON.stringify(stamps));
   }, [stamps]);
 
+  // 현장 QR 스캔 URL 접속 시 (?stamp=... 또는 ?qr=...) 자동 스탬프 발급
   useEffect(() => {
-    localStorage.setItem('crl_coupons', JSON.stringify(coupons));
-  }, [coupons]);
+    if (typeof window === 'undefined') return;
+
+    const detectedStoreId = extractStoreIdFromQr(window.location.href);
+    if (detectedStoreId) {
+      const store = STORES_DATA.find(s => s.storeId === detectedStoreId);
+      if (store) {
+        addStamp(detectedStoreId);
+        setQrToastMessage(`🎉 [${store.marketName}] ${store.name} 현장 QR 인증 성공! 스탬프가 자동으로 찍혔습니다.`);
+        setSelectedStore(store);
+
+        // 브라우저 주소창 깔끔하게 정리 (URL query parameter 제거)
+        try {
+          const cleanUrl = window.location.pathname + window.location.hash;
+          window.history.replaceState({}, document.title, cleanUrl);
+        } catch {
+          // ignore
+        }
+      }
+    }
+  }, []);
+
+  const dismissQrToast = () => setQrToastMessage(null);
 
   const t = (key: string): string => {
     if (I18N[key] && I18N[key][language]) {
@@ -196,10 +212,6 @@ export const MarketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const hasStamp = (storeId: string) => stamps.includes(storeId);
 
-  const useCoupon = (couponId: string) => {
-    setCoupons(prev => prev.map(c => c.id === couponId ? { ...c, isUsed: true } : c));
-  };
-
   const openQrScanner = () => setIsQrScannerOpen(true);
   const closeQrScanner = () => setIsQrScannerOpen(false);
 
@@ -224,13 +236,13 @@ export const MarketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         closeStoreDetail,
         selectedMarketFilter,
         setSelectedMarketFilter,
+        activeThemeRoad,
+        setActiveThemeRoad,
         searchQuery,
         setSearchQuery,
         stamps,
         addStamp,
         hasStamp,
-        coupons,
-        useCoupon,
         isQrScannerOpen,
         openQrScanner,
         closeQrScanner,
@@ -238,6 +250,8 @@ export const MarketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         directionsStore,
         openDirections,
         closeDirections,
+        qrToastMessage,
+        dismissQrToast,
         t,
       }}
     >

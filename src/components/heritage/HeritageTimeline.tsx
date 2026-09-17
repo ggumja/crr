@@ -19,7 +19,7 @@ export const HeritageTimeline: React.FC = () => {
             <span>CHRONOLOGY · 1960 ~ 2026</span>
           </div>
           <h2 className="font-black text-xl tracking-tight text-white leading-snug">
-            66년 세월이 빚어낸 청량로드 시간여행
+            청량로드1960 · 66년의 아카이브
           </h2>
           <p className="text-xs sm:text-sm text-slate-200 mt-1.5 leading-relaxed font-normal">
             피난민과 농민들이 일군 장터에서 아시아 최대 한방 클러스터, 그리고 청년과 레트로가 상생하는 오늘까지의 발자취입니다.

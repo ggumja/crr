@@ -1,10 +1,10 @@
 import React from 'react';
-import { Map, UtensilsCrossed, History, Ticket, ArrowUpRight } from 'lucide-react';
+import { Map, Compass, History, Award, ArrowUpRight } from 'lucide-react';
 import { useMarket } from '../../context/MarketContext';
 import { ActiveTab } from '../../types/market';
 
 export const QuickMenuGrid: React.FC = () => {
-  const { setActiveTab, stamps, coupons } = useMarket();
+  const { setActiveTab, stamps } = useMarket();
 
   const menus: {
     tab: ActiveTab;
@@ -14,32 +14,32 @@ export const QuickMenuGrid: React.FC = () => {
     badge?: string;
   }[] = [
     {
+      tab: 'heritage',
+      title: '청량로드1960',
+      subtitle: '1960~2026 청량로드 아카이브',
+      icon: History,
+      badge: '66년사',
+    },
+    {
       tab: 'map',
-      title: '통합 가이드맵',
-      subtitle: '9개 시장 구역 & 골목 탐색',
+      title: '통합가이드맵',
+      subtitle: '4대 테마길(볼·먹·즐·밤) 지도 탐색',
       icon: Map,
-      badge: '9개 구역',
+      badge: '4대 테마길',
     },
     {
       tab: 'gourmet',
-      title: '맛집 보드게임',
-      subtitle: '주사위 굴리고 8대 미식 스탬프',
-      icon: UtensilsCrossed,
-      badge: `${stamps.length}/8 완료`,
-    },
-    {
-      tab: 'heritage',
-      title: '노포 시간여행',
-      subtitle: '1960~2026 청량로드 아카이브',
-      icon: History,
-      badge: '60년사',
+      title: '가이드투어',
+      subtitle: '힐링·맛·인생사진·밤 4대 코스',
+      icon: Compass,
+      badge: `${stamps.length}/8 인증`,
     },
     {
       tab: 'profile',
-      title: '스탬프 & 쿠폰함',
-      subtitle: '적립 리워드 및 할인쿠폰 3종',
-      icon: Ticket,
-      badge: `${coupons.filter(c => !c.isUsed).length}장 보유`,
+      title: '스탬프 여권',
+      subtitle: '4대 테마길 인증 스탬프 & 배지',
+      icon: Award,
+      badge: `${stamps.length}개 달성`,
     },
   ];
 
