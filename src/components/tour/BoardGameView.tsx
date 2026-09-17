@@ -100,10 +100,18 @@ export const BoardGameView: React.FC = () => {
           </div>
         </div>
 
-        {/* 4대 테마 로드 탭 전환 버튼들 */}
-        <div className="relative z-10 grid grid-cols-4 gap-1.5 p-1 bg-black/30 rounded-2xl border border-white/10">
+        {/* 4대 테마 로드 탭 전환 버튼들 (줄바꿈 방지 및 한 줄 수평 정렬) */}
+        <div className="relative z-10 grid grid-cols-4 gap-1 sm:gap-1.5 p-1 bg-black/30 rounded-2xl border border-white/10">
           {THEME_ROADS_DATA.map((road) => {
             const isSelected = activeThemeRoad === road.id;
+            const roadLabels: Record<string, { icon: string; name: string }> = {
+              healing: { icon: '🌿', name: '힐링로드' },
+              taste: { icon: '🍖', name: '맛로드' },
+              photo: { icon: '📸', name: '사진로드' },
+              night: { icon: '🌙', name: '밤로드' },
+            };
+            const item = roadLabels[road.id] || { icon: '🚩', name: road.title };
+
             return (
               <button
                 key={road.id}
@@ -111,19 +119,16 @@ export const BoardGameView: React.FC = () => {
                   setActiveThemeRoad(road.id);
                   setExpandedSpotOrder(1);
                 }}
-                className={`py-2 px-1 rounded-xl transition-all flex flex-col items-center justify-center text-center ${
+                className={`py-2 px-1 rounded-xl transition-all flex items-center justify-center gap-0.5 sm:gap-1 text-center whitespace-nowrap ${
                   isSelected
                     ? 'bg-[#EA580C] text-white font-black shadow-md ring-1 ring-white/40 scale-102'
                     : 'text-slate-300 hover:text-white hover:bg-white/10 font-bold'
                 }`}
               >
-                <span className="text-xs tracking-tight truncate w-full">
-                  {road.id === 'healing' && '🌿 힐링'}
-                  {road.id === 'taste' && '🍖 맛'}
-                  {road.id === 'photo' && '📸 사진'}
-                  {road.id === 'night' && '🌙 밤'}
+                <span className="text-xs sm:text-sm shrink-0">{item.icon}</span>
+                <span className="text-[11px] sm:text-xs tracking-tight whitespace-nowrap">
+                  {item.name}
                 </span>
-                <span className="text-[10px] opacity-75 mt-0.5">로드</span>
               </button>
             );
           })}
