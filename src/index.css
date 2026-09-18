@@ -34,9 +34,15 @@ html, body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* Typography settings */
+h1, h2, h3, h4, h5, h6, p, span, button, a {
+  word-break: keep-all;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-style: normal !important;
   font-family: var(--font-sans);

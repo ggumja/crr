@@ -70,20 +70,20 @@ export const QuickMenuGrid: React.FC = () => {
                   <Icon size={21} />
                 </div>
                 {item.badge && (
-                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200/60">
+                  <span className="text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200/60 whitespace-nowrap shrink-0">
                     {item.badge}
                   </span>
                 )}
               </div>
 
               <div>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm sm:text-base font-extrabold text-navy-900 group-hover:text-[#7E5D0A] tracking-tight transition-colors">
+                <div className="flex items-center justify-between gap-1">
+                  <h3 className="text-sm sm:text-base font-extrabold text-navy-900 group-hover:text-[#7E5D0A] tracking-tight transition-colors break-keep truncate">
                     {item.title}
                   </h3>
-                  <ArrowUpRight size={15} className="text-slate-400 group-hover:text-[#7E5D0A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <ArrowUpRight size={15} className="text-slate-400 group-hover:text-[#7E5D0A] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                 </div>
-                <p className="text-xs text-slate-600 mt-1 leading-snug font-normal">
+                <p className="text-xs text-slate-600 mt-1 leading-snug font-normal line-clamp-2 break-keep">
                   {item.subtitle}
                 </p>
               </div>

@@ -37,7 +37,7 @@ export const StampPassportView: React.FC = () => {
         </div>
 
         {/* 8 Stamp Slots Grid */}
-        <div className="grid grid-cols-4 gap-2.5 pt-1">
+        <div className="grid grid-cols-4 gap-2 pt-1">
           {TOUR_SPOTS.map((spot) => {
             const isCompleted = stamps.includes(spot.storeId);
             return (
@@ -47,23 +47,23 @@ export const StampPassportView: React.FC = () => {
                   const store = STORES_DATA.find(s => s.storeId === spot.storeId);
                   if (store) openStoreDetail(store);
                 }}
-                className={`p-3 rounded-2xl border text-center flex flex-col items-center justify-center transition-all active:scale-95 ${
+                className={`p-2 sm:p-3 rounded-2xl border text-center flex flex-col items-center justify-center transition-all active:scale-95 ${
                   isCompleted
                     ? 'bg-[#FAF6E6] border-[#EFC548]/70 text-[#0C1326] shadow-xs'
                     : 'bg-slate-50 border-slate-200 text-slate-400 hover:border-slate-300'
                 }`}
               >
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-black mb-1.5 ${
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-black mb-1 shrink-0 ${
                   isCompleted
                     ? 'bg-[#EFC548] text-[#0C1326] shadow-xs'
                     : 'bg-slate-200 text-slate-500'
                 }`}>
                   {isCompleted ? '✓' : spot.spotNumber}
                 </div>
-                <span className="text-xs font-bold line-clamp-1 text-navy-900">
+                <span className="text-[11px] sm:text-xs font-bold truncate w-full text-navy-900 block">
                   {spot.name.replace(/^\d+\.\s*/, '')}
                 </span>
-                <span className={`text-[11px] font-bold mt-0.5 ${isCompleted ? 'text-[#7E5D0A]' : 'text-slate-400'}`}>
+                <span className={`text-[10px] font-bold mt-0.5 whitespace-nowrap ${isCompleted ? 'text-[#7E5D0A]' : 'text-slate-400'}`}>
                   {isCompleted ? '인증완료' : '미인증'}
                 </span>
               </button>
@@ -71,9 +71,9 @@ export const StampPassportView: React.FC = () => {
           })}
         </div>
 
-        <div className="text-xs sm:text-sm text-slate-700 bg-slate-50 p-3.5 rounded-2xl border border-slate-100 flex items-center justify-between">
-          <span>스탬프 달성: <strong>{completedCount} / {TOUR_SPOTS.length}개 적립</strong></span>
-          <span className="text-[#7E5D0A] font-extrabold">
+        <div className="text-xs sm:text-sm text-slate-700 bg-slate-50 p-3 rounded-2xl border border-slate-100 flex items-center justify-between gap-2 break-keep">
+          <span className="whitespace-nowrap">스탬프: <strong>{completedCount} / {TOUR_SPOTS.length}개</strong></span>
+          <span className="text-[#7E5D0A] font-extrabold text-right truncate">
             {completedCount >= TOUR_SPOTS.length ? '🎉 전 코스 완주 달성!' : `완주까지 ${TOUR_SPOTS.length - completedCount}개 남음`}
           </span>
         </div>

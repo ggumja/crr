@@ -37,8 +37,8 @@ export const FilterChips: React.FC = () => {
   return (
     <div className="space-y-2">
       {/* Mode Switcher Tab (4대 테마길 우선) */}
-      <div className="flex items-center justify-between px-1">
-        <div className="flex items-center gap-1 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80">
+      <div className="flex items-center justify-between gap-1 px-1">
+        <div className="flex items-center gap-1 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 shrink-0">
           <button
             onClick={() => {
               setFilterMode('theme');
@@ -46,7 +46,7 @@ export const FilterChips: React.FC = () => {
                 setSelectedMarketFilter('all');
               }
             }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-black transition-all whitespace-nowrap ${
               filterMode === 'theme'
                 ? 'bg-white text-navy-900 shadow-xs border border-slate-200/60'
                 : 'text-slate-500 hover:text-slate-800 font-semibold'
@@ -61,7 +61,7 @@ export const FilterChips: React.FC = () => {
                 setSelectedMarketFilter('all');
               }
             }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all ${
+            className={`px-2.5 py-1.5 rounded-xl text-[11px] sm:text-xs font-black transition-all whitespace-nowrap ${
               filterMode === 'market'
                 ? 'bg-white text-navy-900 shadow-xs border border-slate-200/60'
                 : 'text-slate-500 hover:text-slate-800 font-semibold'
@@ -71,7 +71,7 @@ export const FilterChips: React.FC = () => {
           </button>
         </div>
 
-        <span className="text-[11px] text-slate-400 font-medium">
+        <span className="text-[10px] sm:text-[11px] text-slate-400 font-medium whitespace-nowrap truncate text-right">
           {filterMode === 'theme' ? '자원별 코스 필터' : '시장별 점포 필터'}
         </span>
       </div>

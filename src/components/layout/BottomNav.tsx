@@ -43,7 +43,7 @@ export const BottomNav: React.FC = () => {
                   </span>
                 )}
               </div>
-              <span className={`text-xs mt-1 tracking-tight ${isActive ? 'font-black text-[#0C1326]' : 'text-slate-500 font-medium'}`}>
+              <span className={`text-[10px] sm:text-xs mt-1 tracking-tight whitespace-nowrap ${isActive ? 'font-black text-[#0C1326]' : 'text-slate-500 font-medium'}`}>
                 {item.label}
               </span>
               {isActive && (

@@ -48,12 +48,12 @@ export const AnchorStoresRow: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
                 
-                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/70 backdrop-blur-md text-white text-xs font-semibold">
+                <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-slate-900/70 backdrop-blur-md text-white text-xs font-semibold whitespace-nowrap">
                   {marketName}
                 </span>
 
                 {titleBadge && (
-                  <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-lg bg-[#EFC548] text-[#0C1326] text-xs font-black shadow-xs">
+                  <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-lg bg-[#EFC548] text-[#0C1326] text-xs font-black shadow-xs whitespace-nowrap">
                     {titleBadge}
                   </span>
                 )}
@@ -62,22 +62,22 @@ export const AnchorStoresRow: React.FC = () => {
               {/* Info Box */}
               <div className="p-4 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-base font-extrabold text-navy-900 group-hover:text-[#7E5D0A] transition-colors line-clamp-1">
+                  <h3 className="text-base font-extrabold text-navy-900 group-hover:text-[#7E5D0A] transition-colors truncate">
                     {name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 mt-1.5 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 mt-1.5 leading-relaxed font-normal break-keep">
                     {description}
                   </p>
                 </div>
 
               <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs text-[#7E5D0A] font-bold flex items-center gap-1">
+                <span className="text-xs text-[#7E5D0A] font-bold flex items-center gap-1 whitespace-nowrap">
                   <span>{t('smallbeeLinked')}</span>
-                  <ExternalLink size={12} />
+                  <ExternalLink size={12} className="shrink-0" />
                 </span>
-                <span className="text-xs sm:text-sm text-[#7E5D0A] font-extrabold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform">
+                <span className="text-xs sm:text-sm text-[#7E5D0A] font-extrabold flex items-center gap-0.5 group-hover:translate-x-0.5 transition-transform whitespace-nowrap">
                   <span>{t('viewDetails')}</span>
-                  <ChevronRight size={15} />
+                  <ChevronRight size={15} className="shrink-0" />
                 </span>
               </div>
             </div>
